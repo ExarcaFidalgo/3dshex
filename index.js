@@ -121,6 +121,7 @@ gData.links.forEach(link => {
     let hoverNode = null;
 	let activeTooltip = false;
 	let activeElement = null;
+	let collapse = false;
 
     const Graph = ForceGraph3D()
     (document.getElementById('3d-graph'))
@@ -218,6 +219,30 @@ gData.links.forEach(link => {
             node, 
             3000  
           );
+        })
+		.onNodeRightClick(node => {
+          
+		  if(!collapse) {
+			  let visibleNodes = [];
+			  node.neighbors.forEach(node => {
+				  let newNode = {id: node.id, p31: node.p31 };
+				  let found = visibleNodes.find(obj => {
+					return obj.id === newNode.id
+				  });
+				  if(!found) visibleNodes.push(newNode); 
+			  });
+			  let visibleLinks = [];
+			  node.links.forEach(link => {
+				  let newLink = {source: link.source.id, target: link.target.id, name: link.name };
+				  visibleLinks.push(newLink);
+			  });
+			  Graph.graphData({nodes: visibleNodes, links: visibleLinks});
+			  collapse = true;
+		  }
+		  else {
+			  Graph.graphData(gData);
+			  collapse = false;
+		  }
         });
 
     function updateHighlight() {

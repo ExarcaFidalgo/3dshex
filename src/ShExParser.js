@@ -32,6 +32,7 @@ class ShExParser {
 
 	this.gg.prefixes = this.prefixes;
 	this.gg.shapes = source.shapes;
+	
   
 	return this.gg.createGraph(source.shapes);
   }

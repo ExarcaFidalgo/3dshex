@@ -15,10 +15,21 @@ shxtx.click(shExTo3D);
 
 function shExTo3D() {
 	let text = shExEditor.getValue();
+	let gData = null;
 	
-	let gData = shexParser.parseShExToGraph(text);
+	try {
+		gData = shexParser.parseShExToGraph(text);
+	} catch(ex) {
+		alert("An error has occurred when generating the graph data: \n" + ex);
+	}
 	
-	TresDGen.run(gData);
+	try {
+		TresDGen.run(gData);
+	} catch(ex) {
+		alert("An error has occurred when generating the visualization: \n" + ex);
+	}
+	
+	
 
 	$("#editorcontainer").css("display", "none");
 	$("#graphcontainer").css("display", "inherit");

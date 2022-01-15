@@ -8,3 +8,5 @@
 * Tooltips de wikidata al sobrevolar un nodo o una relación.
 * Zoom automático al hacer clic izquierdo sobre un nodo.
 * Mostrar únicamente sus relaciones y vecinos al hacer clic derecho sobre un nodo (un segundo clic restituye el grafo).
+
+_Ahora permite indicar cualquier entrada, pero no está planteado más que para relaciones simples entre entidades. Cualquier otro experimento, a su discreción._

@@ -1,5 +1,4 @@
-const shexParser = require("./src/ShExParser.js");
-const TresDGen = require("./src/TresDGen.js");
+const tresd = require("3dshex");
 
 if(document.getElementById("shextext") !== null) {
     shExEditor = CodeMirror.fromTextArea(document.getElementById("shextext"), {
@@ -15,21 +14,7 @@ shxtx.click(shExTo3D);
 
 function shExTo3D() {
 	let text = shExEditor.getValue();
-	let gData = null;
-	
-	try {
-		gData = shexParser.parseShExToGraph(text);
-	} catch(ex) {
-		alert("An error has occurred when generating the graph data: \n" + ex);
-	}
-	
-	try {
-		TresDGen.run(gData);
-	} catch(ex) {
-		alert("An error has occurred when generating the visualization: \n" + ex);
-	}
-	
-	
+	tresd.shExTo3D(text, "3d-graph");
 
 	$("#editorcontainer").css("display", "none");
 	$("#graphcontainer").css("display", "inherit");
